@@ -369,6 +369,11 @@ function M.setup()
     -- NOTE: maybe add these with distinct highlights?
     -- ["@lsp.typemod.variable.globalScope"] (global variables)
 
+    --visual-multi
+    VM_Mono = { fg = c.bg, bg = c.fg },
+    VM_Cursor = { fg = c.bg, bg = c.fg },
+    VM_Extend = { fg = c.bg, bg = c.fg },
+    VM_Insert = { fg = c.bg, bg = c.fg },
     -- ts-rainbow
     rainbowcol1 = { fg = c.red },
     rainbowcol2 = { fg = c.yellow },
