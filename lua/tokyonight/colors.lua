@@ -11,10 +11,11 @@ M.default = {
   terminal_black = "#414868",
   fg = "#c0caf5",
   fg_dark = "#a9b1d6",
-  fg_gutter = "#3b4261",
+  fg_gutter = "#737aa2",
   dark3 = "#545c7e",
   comment = "#53684a",
   dark5 = "#737aa2",
+  hllnr = "#ffffff", --737aa2",
   blue0 = "#3d59a1",
   blue = "#7aa2f7",
   cyan = "#7dcfff",
@@ -46,8 +47,8 @@ M.default = {
   git = { change = "#6183bb", add = "#449dab", delete = "#914c54" },
   gitSigns = {
     add = "#00ff00",
-    change = "#6600ff",
-    delete = "#ff0000",
+    change = "#ffe400",
+    delete = "#ff1A7A",
   },
 }
 
