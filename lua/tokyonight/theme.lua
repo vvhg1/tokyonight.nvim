@@ -108,7 +108,7 @@ function M.setup()
     -- Float         = { }, --    a floating point constant: 2.3e10
 
     Identifier = { fg = c.magenta, style = options.styles.variables }, -- (preferred) any variable name
-    Function = { italic = true, fg = c.funcyellow, style = options.styles.functions }, -- function name (also: methods for classes)
+    Function = { italic = false, fg = c.funcyellow, style = options.styles.functions }, -- function name (also: methods for classes)
 
     Statement = { fg = c.magenta3 }, -- (preferred) any statement
     -- Conditional   = { }, --  if, then, else, endif, switch, etc.
@@ -286,7 +286,7 @@ function M.setup()
 
     --- Functions
     ["@constructor"] = { fg = c.funcyellow, bold = true }, -- For constructor calls and definitions: `= { }` in Lua, and Java constructors.
-    ["@variable.parameter"] = { italic = true, fg = c.paramblue }, -- For parameters of a function.
+    ["@variable.parameter"] = { italic = false, fg = c.paramblue }, -- For parameters of a function.
     ["@variable.parameter.builtin"] = { fg = util.lighten(c.yellow, 0.8) }, -- For builtin parameters of a function, e.g. "..." or Smali's p[1-99]
 
     --- Keywords
@@ -301,7 +301,7 @@ function M.setup()
     ["@property"] = { fg = c.green1 },
 
     --- Identifiers
-    ["@variable"] = { italic = true, fg = c.varwhite, style = options.styles.variables }, -- Any variable name that does not have another highlight.
+    ["@variable"] = { italic = false, fg = c.varwhite, style = options.styles.variables }, -- Any variable name that does not have another highlight.
     ["@variable.builtin"] = { fg = c.paramblue, underline = true }, -- Variable names that are defined by the languages, like `this` or `self`.
     ["@module.builtin"] = { fg = c.red }, -- Variable names that are defined by the languages, like `this` or `self`.
 
