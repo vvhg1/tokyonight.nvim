@@ -11,10 +11,11 @@ M.default = {
   terminal_black = "#414868",
   fg = "#c0caf5",
   fg_dark = "#a9b1d6",
-  fg_gutter = "#3b4261",
+  fg_gutter = "#737aa2",
   dark3 = "#545c7e",
-  comment = "#565f89",
+  comment = "#53684a",
   dark5 = "#737aa2",
+  hllnr = "#ffffff", --737aa2",
   blue0 = "#3d59a1",
   blue = "#7aa2f7",
   cyan = "#7dcfff",
@@ -23,22 +24,31 @@ M.default = {
   blue5 = "#89ddff",
   blue6 = "#b4f9f8",
   blue7 = "#394b70",
-  magenta = "#bb9af7",
-  magenta2 = "#ff007c",
+  blue8 = "#569CD6",
+  paramblue = "#8BE4D8",
+  varwhite = "#D7D5FF",
+  magenta = "#D362F7",
+  magenta2 = "#F200FF",
+  magenta3 = "#E664F7",
+  stringbrown = "#CE9178",
+  stringgreen = "#6A9955",
   purple = "#9d7cd8",
   orange = "#ff9e64",
   yellow = "#e0af68",
+  funcyellow = "#DED157",
   green = "#9ece6a",
-  green1 = "#73daca",
-  green2 = "#41a6b5",
+  green1 = "#B5CEA8",
+  green2 = "#8EB8A4",
+  greentype = "#00D885",
+  memberpurple = "#B790FF",
   teal = "#1abc9c",
   red = "#f7768e",
   red1 = "#db4b4b",
   git = { change = "#6183bb", add = "#449dab", delete = "#914c54" },
   gitSigns = {
-    add = "#266d6a",
-    change = "#536c9e",
-    delete = "#b2555b",
+    add = "#00ff00",
+    change = "#ffe400",
+    delete = "#ff1A7A",
   },
 }
 
@@ -145,7 +155,7 @@ function M.setup(opts)
   colors.fg_float = colors.fg
 
   colors.error = colors.red1
-  colors.todo = colors.blue
+  colors.todo = colors.orange
   colors.warning = colors.yellow
   colors.info = colors.blue2
   colors.hint = colors.teal

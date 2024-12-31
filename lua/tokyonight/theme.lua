@@ -31,7 +31,7 @@ function M.setup()
     Comment = { fg = c.comment, style = options.styles.comments }, -- any comment
     ColorColumn = { bg = c.black }, -- used for the columns set with 'colorcolumn'
     Conceal = { fg = c.dark5 }, -- placeholder characters substituted for concealed text (see 'conceallevel')
-    Cursor = { fg = c.bg, bg = c.fg }, -- character under the cursor
+    Cursor = { fg = c.bg, bg = c.fg }, -- character under the cursor NOTE: need to change this
     lCursor = { fg = c.bg, bg = c.fg }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
     CursorIM = { fg = c.bg, bg = c.fg }, -- like Cursor, but used when in IME mode |CursorIM|
     CursorColumn = { bg = c.bg_highlight }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
@@ -53,7 +53,7 @@ function M.setup()
     SignColumnSB = { bg = c.bg_sidebar, fg = c.fg_gutter }, -- column where |signs| are displayed
     Substitute = { bg = c.red, fg = c.black }, -- |:substitute| replacement text highlighting
     LineNr = { fg = c.fg_gutter }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
-    CursorLineNr = { fg = c.dark5 }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+    CursorLineNr = { fg = c.hllnr }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
     MatchParen = { fg = c.orange, bold = true }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     ModeMsg = { fg = c.fg_dark, bold = true }, -- 'showmode' message (e.g., "-- INSERT -- ")
     MsgArea = { fg = c.fg_dark }, -- Area for messages and cmdline
@@ -101,35 +101,37 @@ function M.setup()
     -- Uncomment and edit if you want more specific syntax highlighting.
 
     Constant = { fg = c.orange }, -- (preferred) any constant
-    String = { fg = c.green }, --   a string constant: "this is a string"
+    String = { fg = c.stringbrown }, --   a string constant: "this is a string"
     Character = { fg = c.green }, --  a character constant: 'c', '\n'
-    -- Number        = { }, --   a number constant: 234, 0xff
-    -- Boolean       = { }, --  a boolean constant: TRUE, false
+    Number = { fg = c.green1 }, --   a number constant: 234, 0xff
+    Boolean = { fg = c.blue8 }, --  a boolean constant: TRUE, false
     -- Float         = { }, --    a floating point constant: 2.3e10
 
     Identifier = { fg = c.magenta, style = options.styles.variables }, -- (preferred) any variable name
-    Function = { fg = c.blue, style = options.styles.functions }, -- function name (also: methods for classes)
+    Function = { italic = false, fg = c.funcyellow, style = options.styles.functions }, -- function name (also: methods for classes)
 
-    Statement = { fg = c.magenta }, -- (preferred) any statement
+    Statement = { fg = c.magenta3 }, -- (preferred) any statement
     -- Conditional   = { }, --  if, then, else, endif, switch, etc.
     -- Repeat        = { }, --   for, do, while, etc.
     -- Label         = { }, --    case, default, etc.
-    Operator = { fg = c.blue5 }, -- "sizeof", "+", "*", etc.
+    Operator = { fg = c.magenta2 }, -- "sizeof", "+", "*", etc.
+    -- Keyword = { fg = c.cyan, style = options.styles.keywords }, --  any other keyword
     Keyword = { fg = c.cyan, style = options.styles.keywords }, --  any other keyword
     -- Exception     = { }, --  try, catch, throw
 
     PreProc = { fg = c.cyan }, -- (preferred) generic Preprocessor
-    -- Include       = { }, --  preprocessor #include
+    Include = { fg = c.magenta }, --  preprocessor #include
     -- Define        = { }, --   preprocessor #define
     -- Macro         = { }, --    same as Define
     -- PreCondit     = { }, --  preprocessor #if, #else, #endif, etc.
 
-    Type = { fg = c.blue1 }, -- (preferred) int, long, char, etc.
+    Type = { fg = c.greentype }, -- (preferred) int, long, char, etc.
     -- StorageClass  = { }, -- static, register, volatile, etc.
-    -- Structure     = { }, --  struct, union, enum, etc.
+    Structure = { fg = c.blue8, bold = true }, --  struct, union, enum, etc.
     -- Typedef       = { }, --  A typedef
 
-    Special = { fg = c.blue1 }, -- (preferred) any special symbol
+    Special = { italic = true, fg = c.greentype }, -- (preferred) any special symbol
+    Specialconst = { fg = c.blue8 }, -- (preferred) any special symbol
     -- SpecialChar   = { }, --  special character in a constant
     -- Tag           = { }, --    you can use CTRL-] on this
     Delimiter = { link = "Special" }, --  character that needs attention
@@ -176,9 +178,9 @@ function M.setup()
     -- These groups are for the native LSP client. Some other LSP clients may
     -- use these groups, or use their own. Consult your LSP client's
     -- documentation.
-    LspReferenceText = { bg = c.fg_gutter }, -- used for highlighting "text" references
-    LspReferenceRead = { bg = c.fg_gutter }, -- used for highlighting "read" references
-    LspReferenceWrite = { bg = c.fg_gutter }, -- used for highlighting "write" references
+    LspReferenceText = { bg = c.terminal_black }, -- used for highlighting "text" references
+    LspReferenceRead = { bg = c.terminal_black }, -- used for highlighting "read" references
+    LspReferenceWrite = { bg = c.terminal_black }, -- used for highlighting "write" references
 
     DiagnosticError = { fg = c.error }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
     DiagnosticWarn = { fg = c.warning }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default
@@ -216,7 +218,7 @@ function M.setup()
     ["@comment"] = { link = "Comment" },
     ["@keyword.conditional"] = { link = "Conditional" },
     ["@constant"] = { link = "Constant" },
-    ["@constant.builtin"] = { link = "Special" },
+    ["@constant.builtin"] = { link = "Specialconst" },
     ["@constant.macro"] = { link = "Define" },
     ["@keyword.debug"] = { link = "Debug" },
     ["@keyword.directive.define"] = { link = "Define" },
@@ -268,7 +270,7 @@ function M.setup()
     --- Misc
     -- TODO:
     -- ["@comment.documentation"] = { },
-    ["@operator"] = { fg = c.blue5 }, -- For any operator: `+`, but also `->` and `*` in C.
+    ["@operator"] = { fg = c.magenta2 }, -- For any operator: `+`, but also `->` and `*` in C.
 
     --- Punctuation
     ["@punctuation.delimiter"] = { fg = c.blue5 }, -- For delimiters ie: `.`
@@ -278,29 +280,29 @@ function M.setup()
     ["@markup.list.markdown"] = { fg = c.orange, bold = true },
 
     --- Literals
-    ["@string.documentation"] = { fg = c.yellow },
+    ["@string.documentation"] = { fg = c.stringgreen },
     ["@string.regexp"] = { fg = c.blue6 }, -- For regexes.
     ["@string.escape"] = { fg = c.magenta }, -- For escape characters within a string.
 
     --- Functions
-    ["@constructor"] = { fg = c.magenta }, -- For constructor calls and definitions: `= { }` in Lua, and Java constructors.
-    ["@variable.parameter"] = { fg = c.yellow }, -- For parameters of a function.
+    ["@constructor"] = { fg = c.funcyellow, bold = true }, -- For constructor calls and definitions: `= { }` in Lua, and Java constructors.
+    ["@variable.parameter"] = { italic = false, fg = c.paramblue }, -- For parameters of a function.
     ["@variable.parameter.builtin"] = { fg = util.lighten(c.yellow, 0.8) }, -- For builtin parameters of a function, e.g. "..." or Smali's p[1-99]
 
     --- Keywords
-    ["@keyword"] = { fg = c.purple, style = options.styles.keywords }, -- For keywords that don't fall in previous categories.
+    ["@keyword"] = { fg = c.magenta, style = options.styles.keywords }, -- For keywords that don't fall in previous categories.
     ["@keyword.function"] = { fg = c.magenta, style = options.styles.functions }, -- For keywords used to define a fuction.
 
     ["@label"] = { fg = c.blue }, -- For labels: `label:` in C and `:label:` in Lua.
 
     --- Types
     ["@type.builtin"] = { fg = util.darken(c.blue1, 0.8) },
-    ["@variable.member"] = { fg = c.green1 }, -- For fields.
+    ["@variable.member"] = { fg = c.memberpurple }, -- For fields.
     ["@property"] = { fg = c.green1 },
 
     --- Identifiers
-    ["@variable"] = { fg = c.fg, style = options.styles.variables }, -- Any variable name that does not have another highlight.
-    ["@variable.builtin"] = { fg = c.red }, -- Variable names that are defined by the languages, like `this` or `self`.
+    ["@variable"] = { italic = false, fg = c.varwhite, style = options.styles.variables }, -- Any variable name that does not have another highlight.
+    ["@variable.builtin"] = { fg = c.paramblue, underline = true }, -- Variable names that are defined by the languages, like `this` or `self`.
     ["@module.builtin"] = { fg = c.red }, -- Variable names that are defined by the languages, like `this` or `self`.
 
     --- Text
@@ -346,7 +348,7 @@ function M.setup()
     ["@lsp.type.string"] = { link = "@string" },
     ["@lsp.type.typeAlias"] = { link = "@type.definition" },
     ["@lsp.type.unresolvedReference"] = { undercurl = true, sp = c.error },
-    ["@lsp.type.variable"] = {}, -- use treesitter styles for regular variables
+    ["@lsp.type.variable"] = { link = "@tsvariable" }, -- use treesitter styles for regular variables
     ["@lsp.typemod.class.defaultLibrary"] = { link = "@type.builtin" },
     ["@lsp.typemod.enum.defaultLibrary"] = { link = "@type.builtin" },
     ["@lsp.typemod.enumMember.defaultLibrary"] = { link = "@constant.builtin" },
@@ -367,6 +369,11 @@ function M.setup()
     -- NOTE: maybe add these with distinct highlights?
     -- ["@lsp.typemod.variable.globalScope"] (global variables)
 
+    --visual-multi
+    VM_Mono = { fg = c.bg, bg = c.fg },
+    VM_Cursor = { fg = c.bg, bg = c.fg },
+    VM_Extend = { fg = c.bg, bg = c.fg },
+    VM_Insert = { fg = c.bg, bg = c.fg },
     -- ts-rainbow
     rainbowcol1 = { fg = c.red },
     rainbowcol2 = { fg = c.yellow },
@@ -745,7 +752,7 @@ function M.setup()
 
     MiniStatuslineDevinfo = { fg = c.fg_dark, bg = c.bg_highlight },
     MiniStatuslineFileinfo = { fg = c.fg_dark, bg = c.bg_highlight },
-    MiniStatuslineFilename = { fg = c.fg_dark, bg = c.fg_gutter },
+    MiniStatuslineFilename = { fg = c.blue6, bg = c.blue7 },
     MiniStatuslineInactive = { fg = c.blue, bg = c.bg_statusline },
     MiniStatuslineModeCommand = { fg = c.black, bg = c.yellow, bold = true },
     MiniStatuslineModeInsert = { fg = c.black, bg = c.green, bold = true },
